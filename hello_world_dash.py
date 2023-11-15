@@ -1,6 +1,5 @@
 import dash
 from dash import html
-from jinja2 import debug
 
 app = dash.Dash(__name__)
 
