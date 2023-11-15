@@ -12,11 +12,23 @@ data = pd.read_csv(
 )
 
 # Crate a plotly figure for use by dcc.Graph()
-fig = px.line(data, x='DateTime', y='Gold',
-              title="Precious Metal Prices 2018-2021")
+fig = px.line(
+    data,
+    x='DateTime',
+    y=['Gold'],
+    title="Precious Metal Prices 2018-2021",
+    color_discrete_map={"Gold": "gold"}
+)
 
 fig.update_layout(
-    template="plotly_dark"
+    template="plotly_dark",
+    xaxis_title='Date',
+    yaxis_title='Price (USD/oz)',
+    font=dict(
+        family="Verdana, sans-serif",
+        size=18,
+        color='white'
+    )
 )
 
 app = dash.Dash(__name__)
