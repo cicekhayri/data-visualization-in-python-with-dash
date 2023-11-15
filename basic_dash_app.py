@@ -37,9 +37,29 @@ app.title = "Precious Metal Prices 2018-2021"
 app.layout = html.Div(
     id="app-container",
     children=[
-        html.H1("Precious Metal Prices 2018-2021"),
-        html.P("Results in USD/ox"),
-        dcc.Graph(figure=fig)
+        html.Div(
+            id="header-area",
+            children=[
+                html.H1(
+                    id="header-title",
+                    children="Precious Metal Prices",
+
+                ),
+                html.P(
+                    id="header-description",
+                    children=("The cost of precious metals",
+                              html.Br(), "between 2018 and 2021"),
+                ),
+            ],
+        ),
+        html.Div(
+            id="graph-container",
+            children=dcc.Graph(
+                id="price-chart",
+                figure=fig,
+                config={"displayModeBar": False}
+            ),
+        ),
     ]
 )
 
