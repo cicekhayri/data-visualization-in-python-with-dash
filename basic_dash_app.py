@@ -15,6 +15,10 @@ data = pd.read_csv(
 fig = px.line(data, x='DateTime', y='Gold',
               title="Precious Metal Prices 2018-2021")
 
+fig.update_layout(
+    template="plotly_dark"
+)
+
 app = dash.Dash(__name__)
 app.title = "Precious Metal Prices 2018-2021"
 
