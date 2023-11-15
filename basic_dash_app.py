@@ -11,6 +11,8 @@ data = pd.read_csv(
     "precious_metals_prices_2018_2021.csv"
 )
 
+data["DateTime"] = pd.to_datetime(data['DateTime'])
+
 # Crate a plotly figure for use by dcc.Graph()
 fig = px.line(
     data,
@@ -64,6 +66,21 @@ app.layout = html.Div(
                         ),
                     ]
                 ),
+                html.Div(
+                    children=[
+                        html.Div(
+                            className="menu-title",
+                            children="Date Range",
+                        ),
+                        dcc.DatePickerRange(
+                            id='date-range',
+                            min_date_allowed=data.DateTime.min().date(),
+                            max_date_allowed=data.DateTime.max().date(),
+                            start_date=data.DateTime.min().date(),
+                            end_date=data.DateTime.max().date(),
+                        )
+                    ]
+                )
             ]
         ),
         html.Div(
@@ -80,12 +97,17 @@ app.layout = html.Div(
 
 @app.callback(
     Output("price-chart", "figure"),
-    Input("metal-filter", "value")
+    Input("metal-filter", "value"),
+    Input("date-range", "start_date"),
+    Input("date-range", "end_date")
 )
-def update_chart(metal):
+def update_chart(metal, start_date, end_date):
+    filtered_data = data.loc[(data.DateTime >= start_date)
+                             & (data.DateTime <= end_date)]
+
     # Crate a plotly figure for use by dcc.Graph()
     fig = px.line(
-        data,
+        filtered_data,
         x='DateTime',
         y=[metal],
         title="Precious Metal Prices 2018-2021",
