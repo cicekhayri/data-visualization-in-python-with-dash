@@ -5,7 +5,6 @@ body {
 }
 
 /* Header styling */
-
 #header-area {
     background-color: black;
     height: 216px;
@@ -29,8 +28,40 @@ body {
 	font-size: 18px;
 }
 
-/* Graph styling */
+/* Menu styling */
+#menu-area {
+    height: 90px;
+    width: 1200px;
+    display: flex;
+    justify-content: space-evenly;
+    padding-top: 12px;
+    margin: -55px auto 0 auto;
+    background-color: gold;
+}
 
+.menu-title {
+    margin-bottom: 6px;
+    font-weight: bold;
+    color: black;
+}
+
+.Select-control {
+    width: 256px;
+    height: 48px;
+}
+
+.Select--single > .Select-control .Select-value, .Select-placeholder {
+    line-height: 48px;
+	font-weight: bold;
+}
+
+/* Remove annoying border when dropdown has been used. */
+.is-focused:not(.is-open)>.Select-control{
+	border:none;
+	box-shadow: none;
+}
+
+/* Graph styling */
 #graph-container {
     margin-right: auto;
     margin-left: auto;
